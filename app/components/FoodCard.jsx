@@ -1,31 +1,34 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 const FoodCard = ({ food }) => {
-  const title = food?.dish_name ?? food?.title ?? food?.name ?? 'Menu item';
-  const description = food?.cuisine ?? food?.description ?? 'Delicious menu item';
-
-  return (
-    <div className="card bg-base-100 shadow-sm">
-      <figure>
-        <Image
-          src={food?.image_link ?? 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'}
-          alt={title}
-          width={400}
-          height={300}
-          className="h-56 w-full object-cover"
-        />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{title}</h2>
-        <p>{description}</p>
-        <div className="card-actions justify-end">
-          {food?.category && <div className="badge badge-outline">{food.category}</div>}
-          {food?.price != null && <div className="badge badge-outline">৳{food.price}</div>}
+    const { id, dish_name, image_link } = food;
+    return (
+        <div className="card bg-base-100 shadow-sm">
+            <figure>
+                <Image
+                    width={400}
+                    height={400}
+                    src={image_link}
+                    alt="Food Image"
+                ></Image>
+            </figure>
+            <div className="card-body">
+                <h2 className="card-title">
+                    {dish_name}
+                    <div className="badge badge-secondary">NEW</div>
+                </h2>
+                <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+                <div className="card-actions justify-end">
+                    <div className="badge badge-outline">Fashion</div>
+                    <Link href={`/menu/${id}`}>
+                        <div className="badge badge-outline">Show Details</div>
+                    </Link>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default FoodCard;
